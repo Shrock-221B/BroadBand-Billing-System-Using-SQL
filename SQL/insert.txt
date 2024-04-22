@@ -1,0 +1,69 @@
+-- Inserting 10 customers with Indian names
+EXEC InsertCustomerDetails(101, '9876543210', 'Aarav Patel', '123 Main Street, Bangalore', 1, 1);
+EXEC InsertCustomerDetails(102, '9876543211', 'Aarushi Desai', '456 Park Avenue, Bangalore', 2, 2);
+EXEC InsertCustomerDetails(103, '9876543212', 'Aditi Sharma', '789 5th Street, Bangalore', 3, 3);
+EXEC InsertCustomerDetails(104, '9876543213', 'Advait Gupta', '321 Oak Lane, bangalore', 4, 4);
+EXEC InsertCustomerDetails(105, '9876543214', 'Aishwarya Singh', '654 Cedar Road, Bangalore', 5, 5);
+EXEC InsertCustomerDetails(106, '9876543215', 'Anjali Mehra', '987 Elm Street, Bangalore', 6, 6);
+EXEC InsertCustomerDetails(107, '9876543216', 'Arnav Dubey', '246 Park Avenue, Bangalore', 7, 7);
+EXEC InsertCustomerDetails(108, '9876543217', 'Dhruv Gupta', '369 5th Street, Bangalore', 8, 8);
+EXEC InsertCustomerDetails(109, '9876543218', 'Esha Khanna', '852 Oak Lane, Bangalore', 9, 9);
+EXEC InsertCustomerDetails(110, '9876543219', 'Ishaan Sharma', '753 Cedar Road, Bnagalore', 10, 10);
+
+
+
+BEGIN
+    InsertUserLogin(1, 'password1');
+    InsertUserLogin(2, 'password2');
+    InsertUserLogin(3, 'password3');
+    InsertUserLogin(4, 'password4');
+    InsertUserLogin(5, 'password5');
+    InsertUserLogin(6, 'password6');
+    InsertUserLogin(7, 'password7');
+    InsertUserLogin(8, 'password8');
+    InsertUserLogin(9, 'password9');
+    InsertUserLogin(10, 'password10');
+END;
+/
+
+
+
+EXEC InsertNewSubscription(1, 20, 'Basic', 10);
+EXEC InsertNewSubscription(2, 30, 'Standard', 20);
+EXEC InsertNewSubscription(3, 40, 'Premium', 50);
+EXEC InsertNewSubscription(4, 25, 'Basic', 15);
+EXEC InsertNewSubscription(5, 35, 'Standard', 25);
+EXEC InsertNewSubscription(6, 45, 'Premium', 60);
+EXEC InsertNewSubscription(7, 50, 'Premium Plus', 100);
+EXEC InsertNewSubscription(8, 60, 'Ultimate', 200);
+EXEC InsertNewSubscription(9, 70, 'Deluxe', 150);
+EXEC InsertNewSubscription(10, 80, 'Elite', 300);
+
+
+
+exec InsertNewBill(1, 'Jan', 100, 'Paid', 26, 1);
+exec InsertNewBill(2, 'Jan', 200, 'Pending', 26, 2);
+exec InsertNewBill(3, 'Feb', 150, 'Paid', 27, 3);
+exec InsertNewBill(4, 'Feb', 250, 'Paid', 29, 4);
+exec InsertNewBill(5, 'Mar', 300, 'Pending', 30, 5);
+exec InsertNewBill(6, 'Mar', 180, 'Paid', 31, 6);
+exec InsertNewBill(7, 'Apr', 220, 'Pending', 32, 7);
+exec InsertNewBill(8, 'Apr', 280, 'Paid', 33, 8);
+exec InsertNewBill(9, 'May', 350, 'Paid', 34, 9);
+exec InsertNewBill(10, 'May', 200, 'Pending', 35, 10);
+
+
+
+
+EXEC InsertNewTransaction(1, '2023-01-05', 100, 'Card', 1);
+EXEC InsertNewTransaction(2, '2023-01-10', 200, 'Cash', 2);
+EXEC InsertNewTransaction(3, '2023-02-05', 150, 'Card', 3);
+EXEC InsertNewTransaction(4, '2023-02-15', 250, 'Cash', 4);
+EXEC InsertNewTransaction(5, '2023-03-10', 300, 'Card', 5);
+EXEC InsertNewTransaction(6, '2023-03-20', 180, 'Cash', 6);
+EXEC InsertNewTransaction(7, '2023-04-05', 220, 'Card', 7);
+EXEC InsertNewTransaction(8, '2023-04-15', 280, 'Cash', 8);
+EXEC InsertNewTransaction(9, '2023-05-05', 350, 'Card', 9);
+EXEC InsertNewTransaction(10, '2023-05-15', 200, 'Cash', 10);
+
+

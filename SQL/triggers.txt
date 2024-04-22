@@ -1,0 +1,48 @@
+Trigger to update the subscription cost in the bills table when the subscription cost is updated in the subscription table:
+
+CREATE OR REPLACE TRIGGER update_subscription_cost
+AFTER UPDATE OF SCost ON Subscription
+FOR EACH ROW
+BEGIN
+    UPDATE Bills
+    SET Cost = :new.SCost
+    WHERE SubscriptionID = :old.Sub_ID;
+END;
+/
+
+Trigger to automatically insert a new bill for a customer when a new subscription is added for that customer:
+
+
+CREATE OR REPLACE TRIGGER add_new_subscription_bill
+AFTER INSERT ON CustomerDetails
+FOR EACH ROW
+BEGIN
+    INSERT INTO Bills (Bill_no, Month, Cost, CustomerID, SubscriptionID)
+    VALUES ((SELECT MAX(Bill_no) FROM Bills) + 1, TO_CHAR(SYSDATE, 'Month'), :new.SCost, :new.Customer_ID, :new.SubID);
+END;
+/
+
+
+Trigger to automatically update a bill's status to "Paid" when a transaction is recorded:
+
+CREATE OR REPLACE TRIGGER update_bill_status_to_paid
+AFTER INSERT ON Transaction_Details
+FOR EACH ROW
+BEGIN
+    UPDATE Bills
+    SET Status = 'Paid'
+    WHERE Bill_no = :new.BillNo;
+END;
+/
+
+
+Trigger to update customer's subscription details when a new bill is added
+
+CREATE OR REPLACE TRIGGER update_subscription_details
+AFTER INSERT ON Bills
+FOR EACH ROW
+BEGIN
+  UPDATE CustomerDetails
+  SET SubID = :new.SubscriptionID
+  WHERE Customer_ID = :new.CustomerID;
+END;

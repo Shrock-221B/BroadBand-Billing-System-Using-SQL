@@ -1,0 +1,116 @@
+CREATE OR REPLACE PROCEDURE InsertUserLogin(
+    p_user_id IN User_Login.UserID%TYPE,
+    p_password IN User_Login.Password%TYPE
+)
+IS
+BEGIN
+    INSERT INTO User_Login (UserID, Password)
+    VALUES (p_user_id, p_password);
+    COMMIT;
+    dbms_output.put_line('New user with UserID ' || p_user_id || ' has been inserted.');
+EXCEPTION
+    WHEN OTHERS THEN
+        dbms_output.put_line('Error: ' || SQLCODE || ' - ' || SQLERRM);
+END InsertUserLogin;
+
+
+
+
+CREATE OR REPLACE PROCEDURE UpdateUserPassword(
+    p_user_id IN User_Login.UserID%TYPE,
+    p_password IN User_Login.Password%TYPE
+)
+IS
+BEGIN
+    UPDATE User_Login
+    SET Password = p_password
+    WHERE UserID = p_user_id;
+    COMMIT;
+    dbms_output.put_line('Password for UserID ' || p_user_id || ' has been updated.');
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        dbms_output.put_line('User with UserID ' || p_user_id || ' not found.');
+    WHEN OTHERS THEN
+        dbms_output.put_line('Error: ' || SQLCODE || ' - ' || SQLERRM);
+END UpdateUserPassword;
+
+
+CREATE OR REPLACE PROCEDURE InsertCustomerDetails(
+    p_customer_id IN CustomerDetails.Customer_ID%TYPE,
+    p_mobile IN CustomerDetails.Mobile%TYPE,
+    p_name IN CustomerDetails.Name%TYPE,
+    p_address IN CustomerDetails.Address%TYPE,
+    p_user_id IN CustomerDetails.UserID%TYPE,
+    p_sub_id IN CustomerDetails.SubID%TYPE
+)
+IS
+BEGIN
+    INSERT INTO CustomerDetails (Customer_ID, Mobile, Name, Address, UserID, SubID)
+    VALUES (p_customer_id, p_mobile, p_name, p_address, p_user_id, p_sub_id);
+    COMMIT;
+    dbms_output.put_line('New customer with CustomerID ' || p_customer_id || ' has been inserted.');
+EXCEPTION
+    WHEN OTHERS THEN
+        dbms_output.put_line('Error: ' || SQLCODE || ' - ' || SQLERRM);
+END InsertCustomerDetails;
+
+
+
+
+CREATE OR REPLACE PROCEDURE InsertNewBill(
+    billNo IN Bills.Bill_no%TYPE,
+    month IN Bills.Month%TYPE,
+    cost IN Bills.Cost%TYPE,
+    status IN Bills.Status%TYPE,
+    customerId IN Bills.CustomerID%TYPE,
+    subId IN Bills.SubscriptionID%TYPE
+)
+IS
+BEGIN
+    INSERT INTO Bills(Bill_no, Month, Cost, Status, CustomerID, SubscriptionID)
+    VALUES(billNo, month, cost, status, customerId, subId);
+    
+    dbms_output.put_line('Bill added successfully');
+END;
+/
+
+
+
+
+CREATE OR REPLACE PROCEDURE InsertNewTransaction(
+    tranId IN Transaction_Details.Tran_id%TYPE,
+    dateOfIssue IN Transaction_Details.DateOfIssue%TYPE,
+    paidAmt IN Transaction_Details.Paid_Amt%TYPE,
+    method IN Transaction_Details.Method%TYPE,
+    billNo IN Transaction_Details.BillNo%TYPE
+)
+IS
+BEGIN
+    INSERT INTO Transaction_Details(Tran_id, DateOfIssue, Paid_Amt, Method, BillNo)
+    VALUES(tranId, dateOfIssue, paidAmt, method, billNo);
+    
+    dbms_output.put_line('Transaction added successfully');
+END;
+/
+
+
+
+
+
+CREATE OR REPLACE PROCEDURE InsertNewSubscription(
+    subId IN Subscription.Sub_ID%TYPE,
+    sCost IN Subscription.SCost%TYPE,
+    sDetails IN Subscription.S_Details%TYPE,
+    sSpeed IN Subscription.S_Speed%TYPE
+)
+IS
+BEGIN
+    INSERT INTO Subscription(Sub_ID, SCost, S_Details, S_Speed)
+    VALUES(subId, sCost, sDetails, sSpeed);
+    
+    dbms_output.put_line('Subscription added successfully');
+END;
+/
+
+
+

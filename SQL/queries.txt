@@ -1,0 +1,51 @@
+Sure, here are some example queries you could run on the database:
+
+1. Get the details of all the customers in the "CustomerDetails" table:
+```
+SELECT * FROM CustomerDetails;
+```
+
+2. Get the details of all the subscriptions in the "Subscription" table:
+```
+SELECT * FROM Subscription;
+```
+
+3. Get the details of all the bills in the "Bills" table:
+```
+SELECT * FROM Bills;
+```
+
+4. Get the details of all the transactions in the "Transaction_Details" table:
+```
+SELECT * FROM Transaction_Details;
+```
+
+5. Get the details of the bills that have been paid:
+```
+SELECT * FROM Bills WHERE Status = 'Paid';
+```
+
+6. Get the details of the customers who have subscribed to a particular subscription plan:
+```
+SELECT * FROM CustomerDetails WHERE SubID = 2;
+```
+
+7. Get the details of the bills for a particular customer:
+```
+SELECT * FROM Bills WHERE CustomerID = 26;
+```
+
+8. Get the total amount paid by a particular customer:
+```
+SELECT SUM(Paid_Amt) FROM Transaction_Details WHERE BillNo IN (SELECT Bill_no FROM Bills WHERE CustomerID = 26);
+```
+
+9. Get the number of customers who have subscribed to a particular subscription plan:
+```
+SELECT COUNT(*) FROM CustomerDetails WHERE Subscription_ID = 1;
+```
+
+10. Get the bills that are pending for a particular customer:
+```
+SELECT * FROM Bills WHERE CustomerID = 26 AND Status = 'Pending';
+```

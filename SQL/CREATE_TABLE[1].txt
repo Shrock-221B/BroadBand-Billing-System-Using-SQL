@@ -1,0 +1,105 @@
+CREATE TABLE category (
+  CategoryID NUMBER(11) NOT NULL,
+  CategoryName VARCHAR2(30) NOT NULL
+);
+
+INSERT INTO category (CategoryID, CategoryName) VALUES(1, 'Washing Powder');
+INSERT INTO category (CategoryID, CategoryName) VALUES(2, 'Cosmetics');
+INSERT INTO category (CategoryID, CategoryName) VALUES(3, 'Stationary');
+INSERT INTO category (CategoryID, CategoryName) VALUES(4, 'Garments');
+
+
+CREATE TABLE customer_information (
+  CustomerID VARCHAR2(30) NOT NULL,
+  Name VARCHAR2(30) NOT NULL,
+  Address VARCHAR2(50) NOT NULL,
+  Phone VARCHAR2(15) NOT NULL,
+  Password VARCHAR2(15) NOT NULL
+);
+
+CREATE TABLE depleted_product (
+  ProductID NUMBER(11) NOT NULL,
+  Quantity NUMBER(11) NOT NULL
+);
+
+CREATE TABLE payment (
+  TransactionID NUMBER(11) NOT NULL,
+  Amount_Paid NUMBER(11) NOT NULL,
+  Modes VARCHAR2(30) NOT NULL,
+  Transaction_Date NUMBER(11) NOT NULL
+);
+
+CREATE TABLE price_list (
+  ProductID NUMBER(11) NOT NULL,
+  USP NUMBER(11) NOT NULL
+);
+
+CREATE TABLE product (
+  ProductID NUMBER(11) NOT NULL,
+  Pname VARCHAR2(30) NOT NULL,
+  CategoryID NUMBER(11) NOT NULL,
+  SupplierID NUMBER(11) NOT NULL,
+  Quantity_in_stock NUMBER(11) NOT NULL,
+  UnitPrice NUMBER(11) NOT NULL,
+  ReorderLevel NUMBER(11) NOT NULL
+);
+
+CREATE TABLE supplier_information (
+  SupplierID NUMBER(11) NOT NULL,
+  SName VARCHAR2(30) NOT NULL,
+  Address VARCHAR2(50) NOT NULL,
+  Phone VARCHAR2(15) NOT NULL
+);
+
+CREATE TABLE transaction_detail (
+  TransactionID NUMBER(11) NOT NULL,
+  ProductID  NUMBER(11) NOT NULL,
+  Quantity  NUMBER(11) NOT NULL,
+  Discount  NUMBER(11) NOT NULL,
+  Total_Amount  NUMBER(11) NOT NULL,
+  Trans_Init_Date DATE NOT NULL
+);
+
+
+CREATE TABLE transaction_information (
+TransactionID NUMBER(11) NOT NULL,
+CustomerID VARCHAR2(30) NOT NULL,
+Trans_Init_Date DATE NOT NULL);
+
+
+
+
+
+ALTER TABLE  product  ADD CONSTRAINT pk_prodid PRIMARY KEY (ProductID);
+ALTER TABLE transaction_information ADD CONSTRAINT pk_transId PRIMARY KEY (TransactionID);
+ALTER TABLE Transaction_Information ADD CONSTRAINT FK_Customer FOREIGN KEY (CustomerID) REFERENCES Customer_Information(CustomerID); 
+
+ALTER TABLE supplier_information ADD CONSTRAINT pk_suppId PRIMARY KEY (SupplierID);
+
+ALTER TABLE payment ADD CONSTRAINT pk_trId PRIMARY KEY (TransactionID);
+
+-----------------------------------------------
+ALTER TABLE depleted_product ADD CONSTRAINT pk_prId PRIMARY KEY (ProductID);
+ALTER TABLE depleted_Product ADD CONSTRAINT FK_Depleted_Product FOREIGN KEY (ProductID) REFERENCES Product(ProductID);
+
+ALTER TABLE price_list ADD CONSTRAINT pk_productId PRIMARY KEY (ProductID);
+
+ALTER TABLE price_list ADD CONSTRAINT FK_Product_price_list FOREIGN KEY (ProductID) REFERENCES Product(ProductID);
+
+ALTER TABLE category ADD CONSTRAINT pk_catId PRIMARY KEY (CategoryID);
+ALTER TABLE customer_information ADD CONSTRAINT pk_custId PRIMARY KEY (CustomerID);
+
+ALTER TABLE transaction_detail ADD CONSTRAINT pk_transactionId PRIMARY KEY (TransactionID,ProductID);
+ALTER TABLE transaction_detail ADD CONSTRAINT fk_PRODUCTID FOREIGN KEY (ProductID) REFERENCES Product(ProductID);
+
+ALTER TABLE product ADD CONSTRAINT FK_Category FOREIGN KEY (CategoryID) REFERENCES Category(CategoryID);
+ALTER TABLE Product ADD CONSTRAINT FK_Supplier FOREIGN KEY (SupplierID) REFERENCES Supplier_Information(SupplierID);
+
+
+ALTER TABLE Payment ADD CONSTRAINT FK_Transaction FOREIGN KEY (TransactionID) REFERENCES Transaction_Information(TransactionID);
+
+ALTER TABLE Transaction_Detail ADD CONSTRAINT FK_Transaction_Detail FOREIGN KEY (TransactionID) REFERENCES Transaction_Information(TransactionID);
+
+ALTER TABLE Transaction_Detail ADD CONSTRAINT FK_Transaction_Detail_Pro FOREIGN KEY (ProductID) REFERENCES Product(ProductID);
+--------------------------------
+
